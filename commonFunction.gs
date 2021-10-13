@@ -3,7 +3,7 @@
 *argument: values（配列）・column（1次元配列にしたい列のインデックス番号：0～）
 *参考URL  ：https://note.com/nepia_infinity/n/n2356ffbe65dd
 */
-function generateArray_(values, column){
+function generateArray_(values, column) {
   return values.map(record => record[column]).filter(value => value);
 }
 
