@@ -37,7 +37,7 @@ function doPost(e) {
   const arrMsgData = msgSheet.getDataRange().getValues().shift();//[0][1]startMsg,[1][1]endMsg
 
   let msgBody = '';
-  const memberNum = countMemberNum();
+  const memberNum = countCurrentMembers_();
 
   if (status === '開始') {
 
@@ -76,11 +76,18 @@ function getFullName(accountId) {
 }
 
 
-function countMemberNum() {
+/**
+ * 現在の参加者数を取得
+ * @return {number} 現在もくもくしている人の数
+ */
+function countCurrentMembers_() {
 
   const arrLog = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('log').getDataRange().getValues();
   const targetValues = generateArray_(arrLog, 3);//★範囲注意
-  return (targetValues.filter(function (x) { return x === '開始' }).length - targetValues.filter(function (x) { return x === '終了' }).length);
+  const starts = targetValues.filter(function (x) { return x === '開始' }).length;
+  const ends = targetValues.filter(function (x) { return x === '終了' }).length;
+  const currentMembers = starts - ends;
+  return currentMembers;
 
 }
 

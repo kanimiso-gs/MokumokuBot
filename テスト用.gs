@@ -6,6 +6,7 @@ function doPostTest() {
 
   console.log(testInputMessage.match(inputedMassageStart));
   console.log(testInputMessage_false.includes(inputedMassageStart));
+  countCurrentMenbers_();
 
   return;
 }
