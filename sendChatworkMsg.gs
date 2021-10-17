@@ -8,27 +8,11 @@
 function doPost(e) {
 
   const CW_TOKEN = PropertiesService.getScriptProperties().getProperty("CW_TOKEN");//チャットワークAPIトークン
-  const inputedMassageStart = 'もくもく開始';
-  const inputedMassageEnd = 'もくもく終了';
 
-  const json = JSON.parse(e.postData.contents);
-  const inputBody = json.webhook_event.body;
-  console.log('inputBody', inputBody);
+  // ここから関数化
+  const status = getMessageStatus();
 
-  //受け取ったメッセージにで開始か終了か判定
-  let status;
-  if (inputBody.indexOf(inputedMassageStart) === -1) {
-
-    if (inputBody.indexOf(inputedMassageEnd) === -1) return;//開始でも終了でもないので何もしない
-    status = '終了';
-    console.log('もくもく終了です');
-
-  } else {
-
-    status = '開始';
-    console.log('もくもく開始です');
-
-  }
+  // ここまで関数化
 
   //受け取ったメッセージの情報
   const accountId = json.webhook_event.account_id;
