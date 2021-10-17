@@ -104,12 +104,21 @@ function getLastEntryDate(accountId) {
 }
 
 
+/**
+ * 指定したアカウントの「開始」の数をカウントして返す関数
+ * logシートに記述されたこれまでの「開始」の数 + 今回の1回分を加算する
+ * 
+ * @param {number} accountId - カウントしたいアカウントのID
+ * @return {number} entryNum - 開始の数
+ */
 function getEntryNum(accountId) {
 
   const logSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('log');
   const arrLog = logSheet.getDataRange().getValues();
   const targetValues = generateArray_(arrLog, 4);//★範囲注意
-  return targetValues.filter(function (x) { return x === accountId + '開始' }).length + 1;
+  const pastEntryNum = targetValues.filter(function (x) { return x === accountId + '開始' }).length
+  const entryNum = pastEntryNum + 1;
+  return entryNum;
 
 }
 
